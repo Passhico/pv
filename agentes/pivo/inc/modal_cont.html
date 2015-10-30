@@ -1,0 +1,519 @@
+<style>
+    .modal-header {
+        color:black;
+        padding:9px 15px;
+        border-bottom:1px solid #eee;
+        background-color: #f0ad4e;
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .modal-footer {
+        color:black;
+        padding:9px 15px;
+        border-bottom:1px solid #f0ad4e;
+        background-color: #f0ad4e;
+        -webkit-border-bottom-left-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .modal-body {
+        background-color: #ffdb99;
+    }
+
+    h2{
+        color:#fff;
+    }
+
+    textarea {
+        resize: none;
+    }
+</style>
+
+<!--modals-->
+<!--modal para registro-->
+<div class="modal fade"  id="registro">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-warning">
+                <h2 style="text-align: center;">Registro Telefónico</h2>
+                <h3 id="mtv" style="color:red"></h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" placeholder="Cod. de Cliente" id="cod3" size="10" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="call_data1"></div>
+                    </div>
+                </div>
+                    <div class="col-md-3">
+                        <input type="text" id="nif3" placeholder="Dni/Cif" class="form-control">
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" onclick="bus_cli()" title="Busca Cliente">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" onclick="to_admin()" id="toadmin_first" title="Ficha Cliente">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <button type="button" class="" onclick="status_changer()" id="status_changer" style="float:right;" title="Pausa/Activa">
+                        <span class="" aria-hidden="true" id="status_changer2"></span>
+                    </button>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn">Cerrar</a>
+                <a data-toggle="modal" href="#sales_modal" class="btn btn-primary">Ventas</a>
+                <a data-toggle="modal" href="#post_sales" class="btn btn-primary">Post-Venta</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of modal para registro-->
+<!--modal registro Ventas-->
+<div class="modal fade" id="sales_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Registro Ventas</h4>
+            </div>
+            <div class="modal-body">
+                <div class="section">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="btn-group-xs" role="group" id="familias">
+                                <label for="familias">Familias</label>
+                                <br />
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia1" onclick="carga_familia(this.innerHTML, this.id)">Componentes</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia2" onclick="carga_familia(this.innerHTML, this.id)">Periféricos</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia3" onclick="carga_familia(this.innerHTML, this.id)">Redes</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia4" onclick="carga_familia(this.innerHTML, this.id)">Cables</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia5" onclick="carga_familia(this.innerHTML, this.id)">PC/Portátil</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia6" onclick="carga_familia(this.innerHTML, this.id)">Audio/Foto/Video</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia7" onclick="carga_familia(this.innerHTML, this.id)">Tablets/eBooks</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia8" onclick="carga_familia(this.innerHTML, this.id)">Smartphones/GPS</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia9" onclick="carga_familia(this.innerHTML, this.id)">Consolas/Gaming</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia10" onclick="carga_familia(this.innerHTML, this.id)">Consumibles</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia11" onclick="carga_familia(this.innerHTML, this.id)">Electro-Hogar</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia12" onclick="carga_familia(this.innerHTML, this.id)">Apple</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia13" onclick="carga_familia(this.innerHTML, this.id)">Otros</button>
+                                <button type="button" class="btn btn-warning" style="margin: 1px;" id="familia14" onclick="carga_familia(this.innerHTML, this.id)">Pagos</button>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form role="form" method="post" id="sales">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="hidden" id="familia">
+                                            <input type="hidden" id="id_origen">
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col-md-12">
+                                                <div class="col-md-4">
+                                                    <label for="telefono">Teléfono</label>
+                                                    <input type="text" id="telefono" maxlength="9" placeholder="teléfono" class="col-md-12">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label for="email">Email</label>
+                                                    <input type="text" id="email" placeholder="email" class="col-md-12">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="input-group col-md-12">
+                                                <div class="col-md-4">
+                                                    <label for="cod">Código Cliente</label>
+                                                    <input type="text" id="cod" name="cod" placeholder="Código de cliente" class="col-md-12" size="10">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="nif">Dni/Cif</label>
+                                                    <input type="text" id="nif" placeholder="Dni/Cif" class="col-md-12">
+                                                </div>
+                                                <br/>
+                                                <button type="button" class="btn btn-default" onclick="bus_cli()">
+                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default" onclick="to_admin()" id="toadmin">
+                                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="input-group col-md-12">
+                                                <div class="col-md-12">
+                                                    <label for="notas">Comentario Solución</label>
+                                                    <textarea id="notas" rows="2" placeholder="Comentario o solución" class="col-md-12"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--form-group-->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="">
+                <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+                <button type="submit" class="btn btn-primary" form="sales">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of modal registro Ventas-->
+<!--modal registro PostVenta-->
+<div class="modal fade" id="post_sales">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Registro PostVenta</h4>
+                <h3 id="mtv2" style="color:red">Motivo del Cliente</h3>
+            </div>
+            <div class="modal-body">
+                <div class="section">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="btn-group-sm" role="group" id="motivos">
+                                <div class="row col-md-12">
+                                    <div class="btn-group-xs col-md-4" role="group" id="garantia">
+                                        <label for="garantia">Garantías</label><br/>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo1" onclick="carga_motivo(this.innerHTML, this.id, 'garantia')">Nuevo</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo2" onclick="carga_motivo(this.innerHTML, this.id, 'garantia')">Info</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo3" onclick="carga_motivo(this.innerHTML, this.id, 'garantia')">Borrar</button>
+                                    </div>
+                                    <div class="btn-group-xs col-md-4" role="group" id="devolucion">
+                                        <label for="devolucion">Devolución</label><br/>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo4" onclick="carga_motivo(this.innerHTML, this.id, 'devolucion')">Nuevo</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo5" onclick="carga_motivo(this.innerHTML, this.id, 'devolucion')">Info</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo6" onclick="carga_motivo(this.innerHTML, this.id, 'devolucion')">Borrar</button>
+                                    </div>
+                                    <div class="btn-group-xs col-md-4" role="group" id="incidencia">
+                                        <label for="incidencia">Incidencia</label><br/>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo7" onclick="carga_motivo(this.innerHTML, this.id, 'incidencia')">Nueva</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo8" onclick="carga_motivo(this.innerHTML, this.id, 'incidencia')">Info</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo9" onclick="carga_motivo(this.innerHTML, this.id, 'incidencia')">Borrar</button>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <hr>
+                                    <div class="btn-group-xs col-md-4" role="group" id="articulos">
+                                        <label for="articulos">Artículos</label><br/>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo10" onclick="carga_motivo(this.innerHTML, this.id, 'articulos')">Disponibilidad</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo11" onclick="carga_motivo(this.innerHTML, this.id, 'articulos')">Servicio Técnico</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo12" onclick="carga_motivo(this.innerHTML, this.id, 'articulos')">Cotización</button>
+                                    </div>
+                                    <div class="btn-group-xs col-md-4" role="group" id="pedidos">
+                                        <label for="pedidos">Pedidos</label><br/>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo13" onclick="carga_motivo(this.innerHTML, this.id, 'pedidos')">Info/Seguimiento</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo14" onclick="carga_motivo(this.innerHTML, this.id, 'pedidos')">Cancelación</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo15" onclick="carga_motivo(this.innerHTML, this.id, 'pedidos')">Modificación Artículos</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo16" onclick="carga_motivo(this.innerHTML, this.id, 'pedidos')">Modificación Dirección</button>
+                                        <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo17" onclick="carga_motivo(this.innerHTML, this.id, 'pedidos')">Modificación Pago</button>
+                                    </div>
+                                    <div class="col-md-4" role="group">
+                                        <div class="btn-group-xs col-md-12" role="group" id="administracion">
+                                            <label for="administracion">Administración</label><br/>
+                                            <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo18" onclick="carga_motivo(this.innerHTML, this.id, 'administracion')">Modificar Factura</button>
+                                            <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo19" onclick="carga_motivo(this.innerHTML, this.id, 'administracion')">Envío/Info. Factura</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <hr>
+                                        </div>
+                                        <div class="btn-group-xs col-md-12" role="group" id="distribucion">
+                                            <label for="distribucion">Distribución</label><br/>
+                                            <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo20" onclick="carga_motivo(this.innerHTML, this.id, 'distribucion')">Alta Cliente</button>
+                                            <button type="button" class="btn btn-warning" style="margin: 1px;" id="motivo21" onclick="carga_motivo(this.innerHTML, this.id, 'distribucion')">Información</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form role="form" method="post" id="post_form">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input id="motivo_padre" type="hidden">
+                                            <input id="motivo_detalle" type="hidden">
+                                            <input id="id_origen2" type="hidden">
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col-md-12">
+                                                <div class="col-md-4">
+                                                    <label for="telefono2">Teléfono</label>
+                                                    <input type="text" id="telefono2" maxlength="9" placeholder="teléfono" class="col-md-12">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label for="email2">Email</label>
+                                                    <input type="text" id="email2" placeholder="email" class="col-md-12">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="input-group col-md-12">
+                                                <div class="col-md-4">
+                                                    <label for="pedido">Pedido o Caso</label>
+                                                    <input type="text" id="pedido" placeholder="Pedido o Caso" class="col-md-12">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="cod2">Código Cliente</label>
+                                                    <input type="text" id="cod2" placeholder="Código de cliente" class="col-md-12">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="nif2">Dni/Cif</label>
+                                                    <input type="text" id="nif2" placeholder="Dni/Cif" class="col-md-12">
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <br>
+                                                    <button type="button" class="btn btn-default" onclick="to_admin()" id="toadmin2" style="float: right">
+                                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-default" onclick="bus_cli()" style="float: right">
+                                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="input-group col-md-12">
+                                                <div class="col-md-12">
+                                                    <label for="notas2">Comentario Solución</label>
+                                                    <textarea id="notas2" rows="2" placeholder="Comentario o solución" class="col-md-12"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!--form-group-->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="">
+                <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+                <button type="submit" class="btn btn-primary" form="post_form">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of modal registro PostVenta-->
+<!--end modals-->
+<script>
+
+    function banear_numero(){
+
+        var telef = document.getElementById('telefono').value;
+
+        $.ajax({
+
+            url: ('bin/kramer.php'),
+            type: ('POST'),
+            data: ('baneartelefono='+telef),
+
+            error: function(){
+
+                alert('error en el baneo');
+            },
+
+            success: function(data) {
+
+                var data2 = JSON.parse(data);
+                alert(data2);
+
+                if(data2 == 'error'){
+
+                    alert('error en el registro');
+                }
+
+                if(data2 == 'numban'){
+
+                    alert('El cliente no podrá usar call2me (24h)');
+                }
+            }
+        })
+    }
+
+    function banear_ip(){
+
+        alert('Para banear al cliente por IP debes ponerte en contacto con programación.');
+
+        /*var telef = document.getElementById('telefono').value;
+
+        $.ajax({
+
+            url: ('bin/kramer.php'),
+            type: ('POST'),
+            data: ('baneartelefono='+telef),
+
+            error: function(){
+
+                alert('error en el baneo');
+            },
+
+            success: function(data) {
+
+                var data2 = JSON.parse(data);
+                alert(data2);
+
+                if(data2 == 'error'){
+
+                    alert('error en el registro');
+                }
+
+                if(data2 == 'numban'){
+
+                    alert('El cliente no podrá usar call2me (24h)');
+                }
+            }
+        })*/
+    }
+
+    $("#sales").submit(function(e) {
+
+        e.preventDefault();
+
+        var data1 = document.getElementById('familia').value;
+        var data2 = document.getElementById('notas').value;
+        var data3 = document.getElementById('telefono').value;
+        var data4 = document.getElementById('nif').value;
+        var data5 = document.getElementById('email').value;
+        var data6 = document.getElementById('cod').value;
+        var data7 = document.getElementById('id_origen').value;
+        var type = 'ventas';
+
+        if (data1 == '' && data2 == '')
+        {
+
+            alert('recuerda que debes seleccionar una familia y añadir un comentario o solución');
+        } else {
+
+            $.ajax({
+
+                url: ('bin/pivo_regs.php'),
+                type: ('POST'),
+                data: ('familias=' + data1 + '&notas=' + data2 + '&telefono=' + data3 + '&nif=' + data4 + '&email=' + data5 + '&cod=' + data6 + '&id_origen=' + data7 + '&tipo=' + type),
+
+                error: function () {
+
+                    alert('error');
+                },
+
+                success: function (data) {
+
+                    alert(data);
+                }
+
+            });
+        }
+        $('.modal').modal('hide');
+    });
+
+    $("#post_form").submit(function(e) {
+
+        e.preventDefault();
+
+//        var data0 = document.getElementById('mtv2').value;
+        var data1 = document.getElementById('motivo_padre').value;
+        var data2 = document.getElementById('motivo_detalle').value;
+        var data3 = document.getElementById('telefono2').value;
+        var data4 = document.getElementById('nif2').value;
+        var data5 = document.getElementById('email2').value;
+        var data6 = document.getElementById('cod2').value;
+        var data7 = document.getElementById('id_origen2').value;
+        var data8 = document.getElementById('pedido').value;
+        var data9 = document.getElementById('notas2').value;
+        var type = 'postventas';
+
+        if(data9 == '' && data2 == '')
+
+        {
+
+            alert('recuerda que debes seleccionar un motivo y añadir un comentario o solución');
+        } else {
+
+            $.ajax({
+
+                url: ('bin/pivo_regs.php'),
+                type: ('POST'),
+                data: ('motivo=' + data1 + '&motivo2=' + data2 + '&telefono2=' + data3 + '&nif2=' + data4 + '&email2=' + data5 + '&cod2=' + data6 + '&id_origen2=' + data7 + '&pedido=' + data8 + '&notas2=' + data9 + '&tipo=' + type),
+
+                error: function () {
+
+                    alert('error');
+                },
+
+                success: function (data) {
+                    alert(data);
+                }
+
+            });
+        }
+        $('.modal').modal('hide');
+    });
+
+    function carga_familia(fam, ident){
+
+        var cont = document.getElementById('familia');
+        cont.value = '';
+        cont.value = fam;
+        var botonazo = '';
+        var array = ['familia1', 'familia2', 'familia3', 'familia4', 'familia5', 'familia6',
+            'familia7', 'familia8', 'familia9', 'familia10', 'familia11', 'familia12', 'familia13', 'familia14'];
+        for(var item in array){
+            var id2 = array[item];
+            if(array[item] == ident){
+                botonazo = document.getElementById(ident);
+                botonazo.setAttribute('class', 'btn btn-danger');
+            } else {
+                botonazo = document.getElementById(id2);
+                botonazo.setAttribute('class', 'btn btn-warning');
+            }
+        }
+    }
+
+    function carga_motivo(motivo, ident, padre){
+
+        var cont = document.getElementById('motivo_detalle');
+        var cont2 = document.getElementById('motivo_padre');
+        cont2.value = '';
+        cont2.value = padre;
+        cont.value = '';
+        cont.value = motivo;
+        var botonazoo = '';
+        var array = ['motivo1', 'motivo2', 'motivo3', 'motivo4', 'motivo5', 'motivo6',
+            'motivo7', 'motivo8', 'motivo9', 'motivo10', 'motivo11', 'motivo12',
+            'motivo13', 'motivo14', 'motivo15', 'motivo16', 'motivo17', 'motivo18',
+            'motivo19', 'motivo20', 'motivo21'];
+        for(var item in array){
+            var id2 = array[item];
+            if(array[item] == ident){
+                botonazoo = document.getElementById(ident);
+                botonazoo.setAttribute('class', 'btn btn-danger');
+            } else {
+                botonazoo = document.getElementById(id2);
+                botonazoo.setAttribute('class', 'btn btn-warning');
+            }
+        }
+    }
+</script>
